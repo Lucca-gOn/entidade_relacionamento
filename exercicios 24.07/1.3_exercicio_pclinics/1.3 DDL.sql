@@ -47,6 +47,35 @@ CREATE TABLE Dono
 
 CREATE TABLE Clinica
 (
-	
+	IdClinica INT PRIMARY KEY IDENTITY,
+	IdEndereco INT FOREIGN KEY REFERENCES Endereco(IdEndereco) NOT NULL
 )
+
+CREATE TABLE Veterinario
+(
+	IdVeterinario INT PRIMARY KEY IDENTITY, 
+	IdClinica INT FOREIGN KEY REFERENCES Clinica(IdClinica), 
+	NomeVeterinario VARCHAR(50)
+)
+
+CREATE TABLE Pet
+(
+	IdPet INT PRIMARY KEY IDENTITY,
+	IdRaca INT FOREIGN KEY REFERENCES Raca(IdRaca) NOT NULL,
+	IdTipoPet INT FOREIGN KEY REFERENCES TipoPet(IdTipoPet) NOT NULL,
+	IdDono INT FOREIGN KEY REFERENCES Dono(IdDono) NOT NULL,
+	Nome VARCHAR (50) NOT NULL,
+	Nascimento DATE NOT NULL
+)
+
+CREATE TABLE Atendimento
+(
+	IdAtendimento INT PRIMARY KEY IDENTITY,
+	IdVeterinario INT FOREIGN KEY REFERENCES Veterinario(IdVeterinario) NOT NULL,
+	IdPet INT FOREIGN KEY REFERENCES Pet(IdPet) NOT NULL,
+	DescricaoConsulta VARCHAR (1500),
+	DataConsulta DATE
+)
+
+--DROP TABLE Veterinario
 
